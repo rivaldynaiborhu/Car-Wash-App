@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "692819857683",
+    "firebase_url": "https://carwashapp-7c2e3.firebaseio.com",
+    "project_id": "carwashapp-7c2e3",
+    "storage_bucket": "carwashapp-7c2e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692819857683:android:bdb8b0ff79922895348ae6",
+        "android_client_info": {
+          "package_name": "com.example.carwashapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692819857683-hppktmm2s41gki5gn9krgrph4cjoemdk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8vg4vkb3s2yOnj3eMdaNoVI5plDE3dq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692819857683-hppktmm2s41gki5gn9krgrph4cjoemdk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

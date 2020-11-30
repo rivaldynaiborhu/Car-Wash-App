@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#EBF5FB"
+    tools:context=".ShopingActivity">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:id="@+id/layout_user_information"
+        android:weightSum="4"
+        android:padding="8dp"
+        android:background="#6699ff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_account_box_white_24dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/imgProfile"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imgProfile">
+
+            <TextView
+                android:id="@+id/name"
+                android:text="Rivaldy Naiborhu"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/email"
+                android:text="rivaldynaiborhu@gmail.com"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/id"
+                android:text="2163761283847"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/signOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Logout"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigation"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        app:menu="@menu/home_menu"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
