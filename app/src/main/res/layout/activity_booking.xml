@@ -55,6 +55,7 @@
         <Button
             android:id="@+id/btn_next_step"
             android:text="next"
+            android:enabled="false"
             android:layout_marginLeft="4dp"
             android:background="@color/colorButton"
             android:textColor="@android:color/white"
