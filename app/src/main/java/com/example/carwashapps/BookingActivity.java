@@ -76,10 +76,18 @@ public class BookingActivity extends AppCompatActivity {
                 if (Common.currentCarwash != null)
                     loadCarwashByPlace(Common.currentCarwash.getCarwashId());
             }
+            else if (Common.step ==2) //pick time slot
+                if (Common.currentWorker != null)
+                    loadTimeSlotOfBarber (Common.currentWorker.getWorkerId());
             viewPager.setCurrentItem(Common.step);
         }
     }
 
+    private void loadTimeSlotOfBarber(String workerId) {
+        //send local broadcast to fragment step 3
+        Intent intent = new Intent(Common.KEY_DISPLAY_TIME_SLOT);
+        localBroadcastManager.sendBroadcast(intent);
+    }
 
 
     private void loadCarwashByPlace(String carwashId) {
@@ -128,7 +136,13 @@ public class BookingActivity extends AppCompatActivity {
     private BroadcastReceiver buttonNextReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+
+            int step = intent.getIntExtra(Common.KEY_STEP, 0);
+            if (step == 1)
             Common.currentCarwash = intent.getParcelableExtra(Common.KEY_CARWASH_STORE);
+            else if (step == 2)
+                Common.currentWorker = intent.getParcelableExtra(Common.KEY_BARBER_SELECTED);
+
             btn_next_step.setEnabled(true);
             setColorButton();
         }
@@ -172,6 +186,7 @@ public class BookingActivity extends AppCompatActivity {
             else
                 btn_previous_step.setEnabled(true);
 
+            btn_next_step.setEnabled(false);
             setColorButton();
             }
 

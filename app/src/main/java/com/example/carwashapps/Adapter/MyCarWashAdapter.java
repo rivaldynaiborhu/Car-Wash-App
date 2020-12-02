@@ -67,6 +67,7 @@ public class MyCarWashAdapter extends RecyclerView.Adapter<MyCarWashAdapter.MyVi
                // send broadcast to tell Booking Activity enable the button
                 Intent intent = new Intent(Common.KEY_ENABLE_BUTTON_NEXT);
                 intent.putExtra(Common.KEY_CARWASH_STORE, carwashList.get(pos));
+                intent.putExtra(Common.KEY_STEP, 1);
                 localBroadcastManager.sendBroadcast(intent);
             }
         });
