@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,17 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.carwashapps.Common.Common;
+import com.example.carwashapps.Profile;
 import com.example.carwashapps.R;
 import com.example.carwashapps.model.BookingInformation;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -38,6 +46,9 @@ import butterknife.Unbinder;
 
 public class BookingStep4Fragment extends Fragment {
 
+
+
+    GoogleSignInClient mGoogleSignInClient;
     SimpleDateFormat simpleDateFormat;
     LocalBroadcastManager localBroadcastManager;
     Unbinder unbinder;
@@ -57,14 +68,18 @@ public class BookingStep4Fragment extends Fragment {
     @BindView(R.id.txt_carwash_website)
     TextView txt_carwash_website;
     @OnClick(R.id.btn_confirm)
+
     void confirmBooking(){
+
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //Google Authentication___________________________________________________
+
 
         //Create Booking Information
         BookingInformation bookingInformation = new BookingInformation();
-
         bookingInformation.setWorkerId(Common.currentWorker.getWorkerId());
         bookingInformation.setWorkerName(Common.currentWorker.getName());
-//        bookingInformation.setCustomerName(Common.currentUser.getName);
+//       bookingInformation.setCustomerName();
 //      bookingInformation.setCustomerPhone(Common.currentUser.getPhoneNumber);
         bookingInformation.setCarwashId(Common.currentCarwash.getCarwashId());
         bookingInformation.getCarwashAddress(Common.currentCarwash.getAddress());
@@ -74,7 +89,7 @@ public class BookingStep4Fragment extends Fragment {
                 .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
         bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
 
-        //Submit to worker document
+        //Submit to worker document ini kode yang bener
         DocumentReference bookingDate = FirebaseFirestore.getInstance()
                 .collection("AllCarwash")
                 .document(Common.city)
@@ -85,8 +100,31 @@ public class BookingStep4Fragment extends Fragment {
                 .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
                 .document(String.valueOf(Common.currentTimeSlot));
 
+        //Ini kode percobaan
+        DocumentReference bookingdateuser = FirebaseFirestore.getInstance()
+               .collection("AllUser")
+  //              .document(Common.city)
+ //               .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
+                .document(String.valueOf(Common.currentTimeSlot));
+
         //Write Data
         bookingDate.set(bookingInformation)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        resetStaticData();
+                        getActivity().finish(); // close activity
+                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //ALL-USER COLLECTION WRITE DATABASE
+        bookingdateuser.set(bookingInformation)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

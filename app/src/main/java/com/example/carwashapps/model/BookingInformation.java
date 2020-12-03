@@ -1,7 +1,7 @@
 package com.example.carwashapps.model;
 
 public class BookingInformation {
-    private String customerName, customerPhone, time, workerId, workerName, carwashId, carwashName, carwashAddress ;
+    private String city, customerName, customerPhone, time, workerId, workerName, carwashId, carwashName, carwashAddress ;
     private Long slot;
 
     public BookingInformation() {
@@ -79,6 +79,10 @@ public class BookingInformation {
         return carwashAddress;
     }
 
+    public String getCity(String city){
+        return city;
+    }
+
     public void setCarwashAddress(String carwashAddress) {
         this.carwashAddress = carwashAddress;
     }
@@ -90,4 +94,11 @@ public class BookingInformation {
     public void setSlot(Long slot) {
         this.slot = slot;
     }
+
+    public BookingInformation(String city) {
+        this.city = city;
+    }
+
+
+
 }

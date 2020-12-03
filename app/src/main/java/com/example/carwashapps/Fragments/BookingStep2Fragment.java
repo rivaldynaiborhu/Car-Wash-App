@@ -43,9 +43,9 @@ public class BookingStep2Fragment extends Fragment {
     private BroadcastReceiver workerDoneReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            ArrayList<Worker> barberArrayList = intent.getParcelableArrayListExtra(Common.KEY_WORKER_LOAD_DONE);
+            ArrayList<Worker>  workerArrayList = intent.getParcelableArrayListExtra(Common.KEY_WORKER_LOAD_DONE);
             // Create adapter late
-            MyWorkerAdapter adapter = new MyWorkerAdapter(getContext(),barberArrayList);
+            MyWorkerAdapter adapter = new MyWorkerAdapter(getContext(),workerArrayList);
             recycler_worker.setAdapter(adapter);
         }
     };

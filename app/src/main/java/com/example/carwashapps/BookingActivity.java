@@ -55,7 +55,6 @@ public class BookingActivity extends AppCompatActivity {
     @BindView(R.id.btn_next_step)
     Button btn_next_step;
 
-    //MASIH ERROR
     //Event
     @OnClick (R.id.btn_previous_step)
     void previousStep(){

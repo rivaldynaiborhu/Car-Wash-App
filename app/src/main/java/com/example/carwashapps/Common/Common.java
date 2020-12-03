@@ -3,6 +3,7 @@ package com.example.carwashapps.Common;
 import com.example.carwashapps.model.Carwash;
 import com.example.carwashapps.model.TimeSlot;
 import com.example.carwashapps.model.Worker;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.firestore.auth.User;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ public class Common {
     public static final Object DISABLE_TAG ="DISABLE" ;
     public static final String KEY_TIME_SLOT ="TIME_SLOT" ;
     public static final String KEY_CONFIRM_BOOKING ="CONFIRM_BOOKING" ;
+    public static final String IS_LOGIN ="IsLogin" ;
     public static Carwash currentCarwash;
     public static int step = 0; // Init first step is 0
     public static String city="";

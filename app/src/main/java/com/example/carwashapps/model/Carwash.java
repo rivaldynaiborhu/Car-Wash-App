@@ -8,6 +8,7 @@ import android.os.Parcelable;
 public class Carwash implements Parcelable {
     private String name, address,website, phone, openHours, carwashId;
 
+
     public Carwash() {
     }
 

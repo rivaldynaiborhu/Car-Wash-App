@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.carwashapps.Common.Common;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,11 +25,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
@@ -43,11 +48,12 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        ButterKnife.bind(Profile.this);
+
 
 
         //Cardview Function_______________________________________________________
@@ -64,12 +70,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
 
 
-
-
-
-
         //Banner______________________________________________________________________________
-
         ImageSlider imageSlider = findViewById(R.id.slider);
 
         List<SlideModel> slideModels = new ArrayList<>();
@@ -114,9 +115,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 .requestEmail()
                 .build();
 
+
+        //user profile
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-
         signOut = findViewById(R.id.signOut);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
@@ -137,7 +138,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         });
 
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+
+         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
             String personName = acct.getDisplayName();
             String personEmail = acct.getEmail();
@@ -166,7 +168,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 });
     }
 
-
+//CardView Home Function_______________________________________________________________________________________________________
     @Override
     public void onClick(View view) {
         Intent i;
