@@ -63,11 +63,15 @@ public class BookingActivity extends AppCompatActivity {
         {
             Common.step--;
             viewPager.setCurrentItem(Common.step);
+            if (Common.step < 3) // always enable next when  step 3
+            {
+                btn_next_step.setEnabled(true);
+                setColorButton();
+            }
         }
     }
     @OnClick (R.id.btn_next_step)
     void nextClick(){
-//       Toast.makeText(this, ""+Common.currentCarwash.getCarwashId(), Toast.LENGTH_SHORT).show();
         if (Common.step < 3 || Common.step ==0)
         {
             Common.step++;
@@ -77,13 +81,27 @@ public class BookingActivity extends AppCompatActivity {
                     loadCarwashByPlace(Common.currentCarwash.getCarwashId());
             }
             else if (Common.step ==2) //pick time slot
+            {
                 if (Common.currentWorker != null)
-                    loadTimeSlotOfBarber (Common.currentWorker.getWorkerId());
+                    loadTimeSlotOfWorker (Common.currentWorker.getWorkerId());
+            }
+
+            else if (Common.step ==3) //confirm
+            {
+                if (Common.currentTimeSlot != -1)
+                   confirmBooking();
+            }
             viewPager.setCurrentItem(Common.step);
         }
     }
 
-    private void loadTimeSlotOfBarber(String workerId) {
+    private void confirmBooking() {
+        //send broadcast to fragment step 4
+        Intent intent = new Intent(Common.KEY_CONFIRM_BOOKING);
+        localBroadcastManager.sendBroadcast(intent);
+    }
+
+    private void loadTimeSlotOfWorker(String workerId) {
         //send local broadcast to fragment step 3
         Intent intent = new Intent(Common.KEY_DISPLAY_TIME_SLOT);
         localBroadcastManager.sendBroadcast(intent);
@@ -142,6 +160,8 @@ public class BookingActivity extends AppCompatActivity {
             Common.currentCarwash = intent.getParcelableExtra(Common.KEY_CARWASH_STORE);
             else if (step == 2)
                 Common.currentWorker = intent.getParcelableExtra(Common.KEY_BARBER_SELECTED);
+            else if (step == 3)
+                Common.currentTimeSlot = intent.getIntExtra(Common.KEY_TIME_SLOT,-1);
 
             btn_next_step.setEnabled(true);
             setColorButton();
