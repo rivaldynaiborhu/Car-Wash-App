@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/signin_background"
+        android:src="@drawable/signup_background"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
@@ -34,6 +34,44 @@
         android:gravity="bottom"
         android:orientation="vertical"
         android:layout_marginBottom="150dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Full Name"
+            android:padding="15dp"
+            android:textColor="#292929"
+            android:textColorHint="#797979" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/primary_500"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            android:backgroundTint="@android:color/transparent"
+            android:padding="15dp"
+            android:layout_marginStart="30dp"
+            android:textColorHint="#797979"
+            android:textColor="#292929"
+            android:layout_marginEnd="30dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/primary_500"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -78,23 +116,23 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp">
 
-          <Button
-              android:id="@+id/btn_login"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginEnd="30dp"
-              android:layout_alignParentEnd="true"
-              android:layout_centerInParent="true"
-              android:text="Sign In"
-              android:textColor="@color/white"
-              android:outlineAmbientShadowColor="@color/primary_500"
-              android:background="@drawable/button_login_background"
-            />
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:text="Sign Up"
+                android:textColor="@color/white"
+                android:outlineAmbientShadowColor="@color/primary_500"
+                android:background="@drawable/button_login_background"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SignIn"
+                android:text="SignUp"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:textColor="@color/primary_500"
@@ -111,8 +149,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
-                android:onClick="OpenSignUpPage"
+                android:text="Sign In"
+                android:onClick="open_activity_main"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:padding="15dp"
@@ -120,16 +158,6 @@
                 android:layout_centerInParent="true"
                 android:layout_alignParentStart="true"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Forgot Password"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:padding="15dp"
-                android:layout_marginEnd="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"/>
 
 
 
@@ -138,16 +166,5 @@
 
     </LinearLayout>
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintCircleRadius="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
