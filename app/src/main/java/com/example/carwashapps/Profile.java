@@ -3,9 +3,16 @@ package com.example.carwashapps;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,7 +62,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         ButterKnife.bind(Profile.this);
 
 
-
         //Cardview Function_______________________________________________________
         card1 =(CardView) findViewById(R.id.card_view_booking);
         card2 =(CardView) findViewById(R.id.card_view_cart);
@@ -69,7 +75,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
 
 
-
         //Banner______________________________________________________________________________
         ImageSlider imageSlider = findViewById(R.id.slider);
 
@@ -78,9 +83,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         slideModels.add(new SlideModel("https://i.ibb.co/b7614jp/banner2.png"));
         slideModels.add(new SlideModel("https://i.ibb.co/S6GR2yN/banner3.png"));
         imageSlider.setImageList(slideModels, true);
-
-
-
 
 
         //Bottom Navigation__________________________________________________________________________________________________
@@ -150,11 +152,13 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             email.setText(personEmail);
             id.setText(personId);
 
-
             Glide.with(this).load(String.valueOf(personPhoto)).into(imageView);
         }
 
     }
+
+
+
 
 
     private void signOut() {
@@ -179,7 +183,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             i = new Intent(this, BookingActivity.class);
             startActivity(i);
             break;
-
 
         }
 

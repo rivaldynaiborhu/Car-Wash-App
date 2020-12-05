@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SignupActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -16,6 +16,7 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
+        android:id="@+id/banner_register"
         android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,6 +37,7 @@
         android:layout_marginBottom="150dp">
 
         <EditText
+            android:id="@+id/fullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -55,9 +57,11 @@
             android:background="@color/primary_500"/>
 
         <EditText
+            android:id="@+id/phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone Number"
+            android:inputType="phone"
             android:backgroundTint="@android:color/transparent"
             android:padding="15dp"
             android:layout_marginStart="30dp"
@@ -74,6 +78,7 @@
             android:background="@color/primary_500"/>
 
         <EditText
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -93,9 +98,11 @@
             android:background="@color/primary_500"/>
 
         <EditText
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:password="true"
             android:backgroundTint="@android:color/transparent"
             android:padding="15dp"
             android:layout_marginStart="30dp"
@@ -117,7 +124,7 @@
             android:layout_marginTop="50dp">
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/registerUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
@@ -147,10 +154,10 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/signIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign In"
-                android:onClick="open_activity_main"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:padding="15dp"
@@ -160,11 +167,27 @@
 
 
 
-
         </RelativeLayout>
 
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:outlineAmbientShadowColor="@color/primary_500"
+            android:backgroundTint="@color/primary_500"/>
+
+
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

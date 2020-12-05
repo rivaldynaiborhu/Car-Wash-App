@@ -2,15 +2,20 @@ package com.example.carwashapps;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -45,6 +50,8 @@ public class BookingActivity extends AppCompatActivity {
     LocalBroadcastManager localBroadcastManager;
     AlertDialog dialog;
     CollectionReference workerRef;
+
+    Button btn_confirm;
 
     @BindView(R.id.step_view)
     StepView stepView;
@@ -114,7 +121,7 @@ public class BookingActivity extends AppCompatActivity {
         //    /AllCarwash/Semarang/Branch/4UT2CGAKBQMQrAEIdmRs/Worker
         if (!TextUtils.isEmpty(Common.city))
         workerRef = FirebaseFirestore.getInstance()
-                .collection("AllCarwash")
+                .collection("allcarwash")
                 .document(Common.city)
                 .collection("Branch")
                 .document(carwashId)
@@ -180,7 +187,41 @@ public class BookingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booking);
         ButterKnife.bind(BookingActivity.this);
 
-        dialog = new SpotsDialog.Builder().setContext(this).build(); // error
+        dialog = new SpotsDialog.Builder().setContext(this).build();
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+//            NotificationManager manager = getSystemService(NotificationManager.class);
+//            manager.createNotificationChannel(channel);
+//
+//        }
+
+
+////_____________mencoba membuat notification example
+//        btn_confirm = findViewById(R.id.btn_confirm);
+//        btn_confirm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String message = "This is Notification example";
+//                NotificationCompat.Builder builder = new NotificationCompat.Builder(BookingActivity.this)
+//                        .setSmallIcon(R.drawable.ic_account_circle_black_24dp)
+//                        .setContentTitle("Set Notification bro")
+//                        .setContentText(message)
+//                        .setAutoCancel(true);
+//
+//                Intent intent = new Intent(BookingActivity.this, Profile.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                intent.putExtra("message", message);
+//
+//                PendingIntent pendingIntent = PendingIntent.getActivity(BookingActivity.this,0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                builder.setContentIntent(pendingIntent);
+//
+//                NotificationManager notificationManager = (NotificationManager)getSystemService(
+//                        Context.NOTIFICATION_SERVICE
+//                );
+//                notificationManager.notify(0,builder.build());
+//            }
+//        });
 
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         localBroadcastManager.registerReceiver(buttonNextReceiver,new IntentFilter(Common.KEY_ENABLE_BUTTON_NEXT));

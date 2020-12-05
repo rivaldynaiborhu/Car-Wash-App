@@ -4,14 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.bluetooth.le.ScanRecord;
 import android.content.Intent;
 import android.media.audiofx.DynamicsProcessing;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -22,17 +27,25 @@ import com.google.android.gms.auth.api.signin.SignInAccount;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-   SignInButton signin;
+    private static final String CHANNEL_ID = "101";
+    SignInButton signin;
    int RC_SIGN_IN = 0;
+   private TextView register;
+   FirebaseFirestore firebaseFirestore;
 
    GoogleSignInClient mGoogleSignInClient;
 
@@ -61,11 +74,39 @@ public class MainActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        //Register Manual ini ________________________________
+        register = (TextView) findViewById(R.id.register);
+        register.setOnClickListener(this);
+
+            createNotificationChannel();
+            getToken();
     }
 
-    public void OpenSignUpPage(View view){
-        startActivity(new Intent(MainActivity.this, SignupActivity.class));
+    private void getToken(){
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+                    @Override
+                    public void onSuccess(InstanceIdResult instanceIdResult) {
+                        Log.e("Token", instanceIdResult.getToken());
+                    }
+                });
     }
+
+    //Membuat channel notifikasi
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "firebaseNotifChannel";
+            String description = "This is the channel to receive firebase notification";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -100,7 +141,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    //Register Manual ________________________________
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.register:
+                startActivity(new Intent(this, SignupActivity.class));
+                break;
+        }
+    }
 }
 
 

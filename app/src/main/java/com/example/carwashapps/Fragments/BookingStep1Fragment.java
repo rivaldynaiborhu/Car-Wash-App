@@ -69,7 +69,7 @@ public class BookingStep1Fragment extends Fragment implements IAllCarwashLoadLis
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        allCarwashRef = FirebaseFirestore.getInstance().collection("AllCarwash");
+        allCarwashRef = FirebaseFirestore.getInstance().collection("allcarwash");
         iAllCarwashLoadListener = this;
         iBranchLoadListener = this;
 
@@ -142,7 +142,7 @@ public class BookingStep1Fragment extends Fragment implements IAllCarwashLoadLis
         Common.city = cityName;
 
         branchRef = FirebaseFirestore.getInstance()
-                .collection("AllCarwash")
+                .collection("allcarwash")
                 .document(cityName)
                 .collection("Branch");
 

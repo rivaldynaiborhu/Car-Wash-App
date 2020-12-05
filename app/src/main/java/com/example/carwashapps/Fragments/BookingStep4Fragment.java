@@ -1,22 +1,30 @@
 package com.example.carwashapps.Fragments;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.carwashapps.BookingActivity;
 import com.example.carwashapps.Common.Common;
 import com.example.carwashapps.Profile;
 import com.example.carwashapps.R;
@@ -47,11 +55,11 @@ import butterknife.Unbinder;
 public class BookingStep4Fragment extends Fragment {
 
 
-
-    GoogleSignInClient mGoogleSignInClient;
     SimpleDateFormat simpleDateFormat;
     LocalBroadcastManager localBroadcastManager;
     Unbinder unbinder;
+
+    private Button btn_confirm;
 
     @BindView(R.id.txt_booking_worker_text)
     TextView txt_booking_worker_text;
@@ -91,7 +99,7 @@ public class BookingStep4Fragment extends Fragment {
 
         //Submit to worker document ini kode yang bener
         DocumentReference bookingDate = FirebaseFirestore.getInstance()
-                .collection("AllCarwash")
+                .collection("allcarwash")
                 .document(Common.city)
                 .collection("Branch")
                 .document(Common.currentCarwash.getCarwashId())
@@ -100,12 +108,6 @@ public class BookingStep4Fragment extends Fragment {
                 .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
                 .document(String.valueOf(Common.currentTimeSlot));
 
-        //Ini kode percobaan
-        DocumentReference bookingdateuser = FirebaseFirestore.getInstance()
-               .collection("AllUser")
-  //              .document(Common.city)
- //               .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
-                .document(String.valueOf(Common.currentTimeSlot));
 
         //Write Data
         bookingDate.set(bookingInformation)
@@ -115,6 +117,7 @@ public class BookingStep4Fragment extends Fragment {
                         resetStaticData();
                         getActivity().finish(); // close activity
                         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -123,21 +126,34 @@ public class BookingStep4Fragment extends Fragment {
             }
         });
 
+
+//        //Ini kode percobaan
+//        DocumentReference bookingdateuser = FirebaseFirestore.getInstance()
+//             .collection("AllUser")
+                //              .document(Common.city)
+                //               .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
+ //               .document(String.valueOf(Common.currentTimeSlot));
+
+
         //ALL-USER COLLECTION WRITE DATABASE
-        bookingdateuser.set(bookingInformation)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        resetStaticData();
-                        getActivity().finish(); // close activity
-                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        bookingdateuser.set(bookingInformation)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        resetStaticData();
+//                        getActivity().finish(); // close activity
+//                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
+
+
     }
 
     private void resetStaticData() {
@@ -184,9 +200,11 @@ public class BookingStep4Fragment extends Fragment {
 
         //Apply format for date display on Confirm
         simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
         localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
         localBroadcastManager.registerReceiver(confirmBookingReceiver, new IntentFilter(Common.KEY_CONFIRM_BOOKING));
+
+
+
 
     }
 
@@ -203,6 +221,9 @@ public class BookingStep4Fragment extends Fragment {
 
         View itemView = inflater.inflate(R.layout.fragment_booking_step_four,container, false);
         unbinder = ButterKnife.bind(this, itemView);
+
         return itemView;
     }
+
+
 }

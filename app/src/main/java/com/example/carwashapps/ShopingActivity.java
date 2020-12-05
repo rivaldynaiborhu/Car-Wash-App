@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.w3c.dom.Text;
+
 public class ShopingActivity extends AppCompatActivity {
 
 
@@ -35,6 +37,10 @@ public class ShopingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shoping);
+
+        TextView textView = findViewById(R.id.text_view);
+        String message = getIntent().getStringExtra("message");
+        textView.setText(message);
 
         // inisialisasi variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);

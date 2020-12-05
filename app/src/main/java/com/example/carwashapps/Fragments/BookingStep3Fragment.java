@@ -79,7 +79,7 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
 
         // /AllCarwash/Semarang/Branch/4UT2CGAKBQMQrAEIdmRs/Worker/YTUwPaKSeoq6IKHhrAWD
         workerDoc = FirebaseFirestore.getInstance()
-                .collection("AllCarwash")
+                .collection("allcarwash")
                 .document(Common.city)
                 .collection("Branch")
                 .document(Common.currentCarwash.getCarwashId())
@@ -98,7 +98,7 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
                         //get information of this booking
                         //if not created return empty
                         CollectionReference date = FirebaseFirestore.getInstance()
-                                .collection("AllCarwash")
+                                .collection("allcarwash")
                                 .document(Common.city)
                                 .collection("Branch")
                                 .document(Common.currentCarwash.getCarwashId())
