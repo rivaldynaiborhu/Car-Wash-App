@@ -11,10 +11,12 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,10 +24,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.carwashapps.BookingActivity;
 import com.example.carwashapps.Common.Common;
+import com.example.carwashapps.MainActivity;
 import com.example.carwashapps.Profile;
 import com.example.carwashapps.R;
 import com.example.carwashapps.model.BookingInformation;
@@ -33,19 +37,24 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import javax.microedition.khronos.egl.EGLDisplay;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +69,9 @@ public class BookingStep4Fragment extends Fragment {
     Unbinder unbinder;
 
     private Button btn_confirm;
+    public String personName;
+
+    GoogleSignInClient mGoogleSignInClient;
 
     @BindView(R.id.txt_booking_worker_text)
     TextView txt_booking_worker_text;
@@ -75,20 +87,19 @@ public class BookingStep4Fragment extends Fragment {
     TextView txt_carwash_phone;
     @BindView(R.id.txt_carwash_website)
     TextView txt_carwash_website;
+
     @OnClick(R.id.btn_confirm)
 
+
+
     void confirmBooking(){
-
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        //Google Authentication___________________________________________________
-
 
         //Create Booking Information
         BookingInformation bookingInformation = new BookingInformation();
         bookingInformation.setWorkerId(Common.currentWorker.getWorkerId());
         bookingInformation.setWorkerName(Common.currentWorker.getName());
-//       bookingInformation.setCustomerName();
-//      bookingInformation.setCustomerPhone(Common.currentUser.getPhoneNumber);
+        bookingInformation.setCustomerName(personName);
+//        bookingInformation.setCustomerPhone(catatan);
         bookingInformation.setCarwashId(Common.currentCarwash.getCarwashId());
         bookingInformation.getCarwashAddress(Common.currentCarwash.getAddress());
         bookingInformation.setCarwashName(Common.currentCarwash.getName());
@@ -117,6 +128,7 @@ public class BookingStep4Fragment extends Fragment {
                         resetStaticData();
                         getActivity().finish(); // close activity
                         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -203,10 +215,21 @@ public class BookingStep4Fragment extends Fragment {
         localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
         localBroadcastManager.registerReceiver(confirmBookingReceiver, new IntentFilter(Common.KEY_CONFIRM_BOOKING));
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
 
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
+        if (acct != null) {
+            personName = acct.getDisplayName();
+            Log.d("personName", personName);
+
+        }
 
 
     }
+
+
 
     @Override
     public void onDestroy() {
@@ -223,6 +246,9 @@ public class BookingStep4Fragment extends Fragment {
         unbinder = ButterKnife.bind(this, itemView);
 
         return itemView;
+
+
+
     }
 
 

@@ -43,7 +43,7 @@ public class ShopingActivity extends AppCompatActivity {
         textView.setText(message);
 
         // inisialisasi variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+       BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         //set home
         bottomNavigationView.setSelectedItemId(R.id.action_shopping);
@@ -66,60 +66,60 @@ public class ShopingActivity extends AppCompatActivity {
         });
 
         //Google Authentication___________________________________________________
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-
-        signOut = findViewById(R.id.signOut);
-        name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
-        imageView = findViewById(R.id.imgProfile);
-        id = findViewById(R.id.id);
-
-
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ShopingActivity.this, MainActivity.class); //still not works
-                switch (view.getId()) {
-                    case R.id.signOut:
-                        signOut();
-                        break;
-                }
-            }
-        });
-
-
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-
-            name.setText(personName);
-            email.setText(personEmail);
-            id.setText(personId);
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail()
+//                .build();
+//
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+//
+//
+//        signOut = findViewById(R.id.signOut);
+//        name = findViewById(R.id.name);
+//        email = findViewById(R.id.email);
+//        imageView = findViewById(R.id.imgProfile);
+//        id = findViewById(R.id.id);
+//
+//
+//        signOut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(ShopingActivity.this, MainActivity.class); //still not works
+//                switch (view.getId()) {
+//                    case R.id.signOut:
+//                        signOut();
+//                        break;
+//                }
+//            }
+//        });
 
 
-            Glide.with(this).load(String.valueOf(personPhoto)).into(imageView);
-        }
+//        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+//        if (acct != null) {
+//            String personName = acct.getDisplayName();
+//            String personEmail = acct.getEmail();
+//            String personId = acct.getId();
+//            Uri personPhoto = acct.getPhotoUrl();
+//
+//            name.setText(personName);
+//            email.setText(personEmail);
+//            id.setText(personId);
+//
+//
+//            Glide.with(this).load(String.valueOf(personPhoto)).into(imageView);
+//        }
 
     }
 
-    private void signOut() {
-        mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(ShopingActivity.this, "Signed out Successfully", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
-    }
+//    private void signOut() {
+//        mGoogleSignInClient.signOut()
+//                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        Toast.makeText(ShopingActivity.this, "Signed out Successfully", Toast.LENGTH_SHORT).show();
+//                        finish();
+//                    }
+//                });
+//    }
 
 
     }

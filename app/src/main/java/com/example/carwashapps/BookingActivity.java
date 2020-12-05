@@ -81,10 +81,16 @@ public class BookingActivity extends AppCompatActivity {
         if (Common.step < 3 || Common.step ==0)
         {
             Common.step++;
-            if(Common.step == 1) //After Choose Carwash
+          if(Common.step == 1) //After Choose Carwash
             {
                 if (Common.currentCarwash != null)
                     loadCarwashByPlace(Common.currentCarwash.getCarwashId());
+//
+//                if (Common.currentWorker != null)
+//                    loadUserLogin(Common.currentWorker.getNameUser());
+//
+//                if (Common.currentWorker != null)
+//                    loadUserEmail(Common.currentWorker.getEmailUser());
             }
             else if (Common.step ==2) //pick time slot
             {
@@ -112,6 +118,19 @@ public class BookingActivity extends AppCompatActivity {
         Intent intent = new Intent(Common.KEY_DISPLAY_TIME_SLOT);
         localBroadcastManager.sendBroadcast(intent);
     }
+
+    //delete soon_____________________________________________________________
+    private void loadUserLogin(String nameUser){
+        Intent intent = new Intent(Common.KEY_USER_INFORMATION);
+        localBroadcastManager.sendBroadcast(intent);
+    }
+
+    private void loadUserEmail(String nameEmail){
+        Intent intent = new Intent(Common.KEY_EMAIL_INFORMATION);
+        localBroadcastManager.sendBroadcast(intent);
+    }
+
+
 
 
     private void loadCarwashByPlace(String carwashId) {

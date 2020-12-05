@@ -6,9 +6,11 @@
     android:orientation="vertical"
     android:background="@color/white">
 
+
+
     <ImageView
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
+        android:layout_width="167dp"
+        android:layout_height="94dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:src="@mipmap/ic_launcher_foreground" />

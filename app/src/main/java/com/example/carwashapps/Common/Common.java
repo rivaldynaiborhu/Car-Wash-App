@@ -1,5 +1,8 @@
 package com.example.carwashapps.Common;
 
+import android.content.Intent;
+
+import com.example.carwashapps.Profile;
 import com.example.carwashapps.model.Carwash;
 import com.example.carwashapps.model.TimeSlot;
 import com.example.carwashapps.model.Worker;
@@ -21,13 +24,15 @@ public class Common {
     public static final String KEY_TIME_SLOT ="TIME_SLOT" ;
     public static final String KEY_CONFIRM_BOOKING ="CONFIRM_BOOKING" ;
     public static final String IS_LOGIN ="IsLogin" ;
+    public static final String KEY_USER_INFORMATION = "USER_INFORMATION";
+    public static final String KEY_EMAIL_INFORMATION = "EMAIL_INFORMATION";
     public static Carwash currentCarwash;
     public static int step = 0; // Init first step is 0
     public static String city="";
     public static Worker currentWorker;
     public static int currentTimeSlot=-1;
     public static Calendar currentDate = Calendar.getInstance();
-    public static User currentUser;
+    public static Profile currentUser;
     public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd_MM_yyyy");   //only use when we need format key
 
     public static String convertTimeSlotToString(int slot) {

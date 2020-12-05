@@ -194,7 +194,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_notification"
+            android:id="@+id/card_view_subscribe"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_marginRight="8dp"
             card_view:cardCornerRadius="8dp"
@@ -214,10 +214,11 @@
                     android:layout_height="50dp"/>
 
                 <TextView
+                    android:id="@+id/text_notif"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Notification"
+                    android:text="Subscribe"
                     android:textSize="15dp" />
 
             </LinearLayout>

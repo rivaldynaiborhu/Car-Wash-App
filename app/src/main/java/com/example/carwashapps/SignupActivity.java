@@ -67,12 +67,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-
-
-
-
-
-
 //________________Balik ke activity main
     @Override
     public void onClick(View view) {

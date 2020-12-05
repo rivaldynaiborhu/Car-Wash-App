@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Worker implements Parcelable {
-    private String name, username, password, workerId;
+    private String name, username, password, workerId, nameUser, emailUser;
     private Long rating;
 
     protected Worker(Parcel in) {
@@ -12,6 +12,8 @@ public class Worker implements Parcelable {
         username = in.readString();
         password = in.readString();
         workerId = in.readString();
+        nameUser = in.readString();
+        emailUser = in.readString();
 
         if (in.readByte() == 0) {
             rating = null;
@@ -38,6 +40,22 @@ public class Worker implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
     }
 
     public String getUsername() {
