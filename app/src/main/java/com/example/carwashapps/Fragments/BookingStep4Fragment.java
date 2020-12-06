@@ -109,7 +109,8 @@ public class BookingStep4Fragment extends Fragment {
                 .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
         bookingInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
 
-        //Submit to worker document ini kode yang bener
+
+        //Submit ke dokumen worker
         DocumentReference bookingDate = FirebaseFirestore.getInstance()
                 .collection("allcarwash")
                 .document(Common.city)

@@ -51,6 +51,7 @@ public class BookingStep3Fragment extends Fragment implements ITimeSlotLoadListe
 
     //Variable
     DocumentReference workerDoc;
+
     ITimeSlotLoadListener iTimeSlotLoadListener;
     AlertDialog dialog;
 

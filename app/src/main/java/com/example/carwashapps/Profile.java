@@ -93,6 +93,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
 
 
+
         //Banner______________________________________________________________________________
         ImageSlider imageSlider = findViewById(R.id.slider);
 
@@ -109,6 +110,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         //set home
         bottomNavigationView.setSelectedItemId(R.id.action_home);
+
+
 
         //Perform item selected listener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -133,7 +136,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 .requestEmail()
                 .build();
 
-
         //user profile
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         signOut = findViewById(R.id.signOut);
@@ -143,7 +145,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         idUser = findViewById(R.id.id);
 
         text_notif = findViewById(R.id.text_notif);
-
 
 
  //        Get user information
