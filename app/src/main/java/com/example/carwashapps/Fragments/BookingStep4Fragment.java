@@ -70,6 +70,7 @@ public class BookingStep4Fragment extends Fragment {
 
     private Button btn_confirm;
     public String personName;
+    public String personEmail;
 
     GoogleSignInClient mGoogleSignInClient;
 
@@ -99,7 +100,7 @@ public class BookingStep4Fragment extends Fragment {
         bookingInformation.setWorkerId(Common.currentWorker.getWorkerId());
         bookingInformation.setWorkerName(Common.currentWorker.getName());
         bookingInformation.setCustomerName(personName);
-//        bookingInformation.setCustomerPhone(catatan);
+        bookingInformation.setCustomerEmail(personEmail);
         bookingInformation.setCarwashId(Common.currentCarwash.getCarwashId());
         bookingInformation.getCarwashAddress(Common.currentCarwash.getAddress());
         bookingInformation.setCarwashName(Common.currentCarwash.getName());
@@ -142,9 +143,9 @@ public class BookingStep4Fragment extends Fragment {
 //        //Ini kode percobaan
 //        DocumentReference bookingdateuser = FirebaseFirestore.getInstance()
 //             .collection("AllUser")
-                //              .document(Common.city)
-                //               .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
- //               .document(String.valueOf(Common.currentTimeSlot));
+        //              .document(Common.city)
+        //               .collection(Common.simpleDateFormat.format(Common.currentDate.getTime()))
+        //               .document(String.valueOf(Common.currentTimeSlot));
 
 
         //ALL-USER COLLECTION WRITE DATABASE
@@ -187,8 +188,8 @@ public class BookingStep4Fragment extends Fragment {
     private void setData() {
         txt_booking_worker_text.setText(Common.currentWorker.getName());
         txt_booking_time_text.setText(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
-        .append(" at ")
-        .append(simpleDateFormat.format(Common.currentDate.getTime())));
+                .append(" at ")
+                .append(simpleDateFormat.format(Common.currentDate.getTime())));
 
         txt_carwash_address.setText(Common.currentCarwash.getAddress());
         txt_carwash_website.setText(Common.currentCarwash.getWebsite());
@@ -222,6 +223,7 @@ public class BookingStep4Fragment extends Fragment {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
         if (acct != null) {
             personName = acct.getDisplayName();
+            personEmail = acct.getEmail();
             Log.d("personName", personName);
 
         }

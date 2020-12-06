@@ -1,15 +1,15 @@
 package com.example.carwashapps.model;
 
 public class BookingInformation {
-    private String city, customerName, customerPhone, time, workerId, workerName, carwashId, carwashName, carwashAddress ;
+    private String city, customerName, customerEmail, time, workerId, workerName, carwashId, carwashName, carwashAddress ;
     private Long slot;
 
     public BookingInformation() {
     }
 
-    public BookingInformation(String customerName, String customerPhone, String time, String workerId, String workerName, String carwashId, String carwashName, String carwashAddress, Long slot) {
+    public BookingInformation(String customerName, String customerEmail, String time, String workerId, String workerName, String carwashId, String carwashName, String carwashAddress, Long slot) {
         this.customerName = customerName;
-        this.customerPhone = customerPhone;
+        this.customerEmail = customerEmail;
         this.time = time;
         this.workerId = workerId;
         this.workerName = workerName;
@@ -27,12 +27,12 @@ public class BookingInformation {
         this.customerName = customerName;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
     public String getTime() {
